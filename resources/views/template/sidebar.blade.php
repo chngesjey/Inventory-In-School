@@ -25,7 +25,7 @@
                         </li>
 
                         <li class="{{ request()->is('tempat*') ? 'active' : ''}}">
-                            <a href="#" class="text-white">
+                            <a href="{{ route('tempat.index') }}" class="text-white">
                                 <i class="fas fa-map-marker-alt"></i>
                                 <span>Tempat</span>
                             </a>
