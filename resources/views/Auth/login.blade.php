@@ -13,6 +13,7 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{asset ('assets/css/style.css')}}">
     <link rel="stylesheet" href="{{asset ('assets/css/components.css')}}">
+    <link rel="stylesheet" href="feedback.css">
 </head>
 
 <body>
@@ -67,13 +68,25 @@
                                             <label class="custom-control-label" for="remember-me">Remember Me</label>
                                         </div>
                                     </div> -->
+                                    <div class="feedback">
+                                        <button class="btn">submit</button>
+                                        <script>
+                                            var btn = document.querySelector(".btn");
+                                            var position;
+                                            btn.addEventListener("mouseover", function() {
+                                                position ? (position = 0) : (position = 150);
+                                                btn.stle.transform = 'translate(${position}px, 0px)';
+                                                btn.style.transition = "all 0.3s ease";
+                                            });
+                                        </script>
+                                    </div>
 
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
                                             Login
                                         </button>
                                     </div>
-                                </form>
+                                </form> -->
                                 <!-- <div class="text-center mt-4 mb-3">
                                     <div class="text-job text-muted">Login With Social</div>
                                 </div>
