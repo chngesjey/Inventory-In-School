@@ -54,7 +54,7 @@
 
                             {{-- Add Nama --}}
                             <label class="mt-2" for="nama">Nama Barang</label>
-                            <input type="text" name="nama" id="nama" value="{{ old('nama')}}" class="form-control @error('nama') is-invalid @enderror">
+                            <input type="text" autocomplete="off" name="nama" id="nama" value="{{ old('nama')}}" class="form-control @error('nama') is-invalid @enderror">
                             @error('nama')
                                 <div class="text-danger">
                                     {{ $message }}

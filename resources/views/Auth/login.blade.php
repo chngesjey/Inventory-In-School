@@ -24,7 +24,7 @@
                     <div
                         class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
                         <div class="login-brand">
-                            <img src="assets/img/stisla-fill.svg" alt="logo" width="100"
+                            <img src="https://yt3.ggpht.com/ytc/AMLnZu9JW4gVnRwef3M2GbDxrfyO00bqDxawTFifLKcY=s900-c-k-c0x00ffffff-no-rj" alt="logo" width="150"
                                 class="shadow-light rounded-circle">
                         </div>
 
@@ -68,25 +68,14 @@
                                             <label class="custom-control-label" for="remember-me">Remember Me</label>
                                         </div>
                                     </div> -->
-                                    <div class="feedback">
-                                        <button class="btn">submit</button>
-                                        <script>
-                                            var btn = document.querySelector(".btn");
-                                            var position;
-                                            btn.addEventListener("mouseover", function() {
-                                                position ? (position = 0) : (position = 150);
-                                                btn.stle.transform = 'translate(${position}px, 0px)';
-                                                btn.style.transition = "all 0.3s ease";
-                                            });
-                                        </script>
-                                    </div>
 
-                                    <!-- <div class="form-group">
+                                    <!-- Untuk Login -->
+                                    <div class="form-group">
                                         <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
                                             Login
                                         </button>
                                     </div>
-                                </form> -->
+                                </form>
                                 <!-- <div class="text-center mt-4 mb-3">
                                     <div class="text-job text-muted">Login With Social</div>
                                 </div>
@@ -102,14 +91,14 @@
                                         </a>
                                     </div>
                                 </div> -->
-
                             </div>
                         </div>
+                        <!-- Register -->
                         <div class="mt-5 text-muted text-center">
-                            Don't have an account? <a href="auth-register.html">Create One</a>
+                            Don't have an account? <a href="{{route('register')}}">Create One</a>
                         </div>
                         <div class="simple-footer">
-                            Copyright &copy; Stisla 2018
+                            Copyright &copy; Anandito 2022
                         </div>
                     </div>
                 </div>
