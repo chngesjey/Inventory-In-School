@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Barang;
 
-class Tempat extends Model
+class Kategori extends Model
 {
     use HasFactory;
 
-    protected $table = 'tempat';
+    protected $table = 'kategori';
 
     protected $guarded = [];
 

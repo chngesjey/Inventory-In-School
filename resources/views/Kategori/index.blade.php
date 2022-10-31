@@ -1,21 +1,26 @@
 @extends('template.layout')
+
 @section('title')
-    Tempat
+    Kategori
 @endsection
+
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Tempat</h1>
+            <h1>Kategori</h1>
         </div>
+
         <div class="section-body">
             <div class="row">
-                {{-- Data Tempat --}}
+
+                {{-- Data Kategori --}}
                 <div class="col-12 col-md-7 col-lg-7">
                     <div class="card">
                         {{-- Judul --}}
                         <div class="card-header">
-                            <h4>Data Tempat</h4>
+                            <h4>Data Kategori</h4>
                         </div>
+
                         {{-- Tabel --}}
                         <div class="card-body">
                             <table class="table table-striped">
@@ -28,25 +33,27 @@
                                 </thead>
                             </table>
                         </div>
+
                     </div>
                 </div>
-                {{-- Tambah Barang --}}
+
+                {{-- Tambah Kategori --}}
                 <div class="col-12 col-md-5 col-lg-5">
                     <div class="card">
 
                         <div class="card-header">
-                            <h4>Tambah Tempat</h4>
+                            <h4>Tambah Kategori</h4>
                         </div>
 
                         <div class="card-body" id="formTambah">
-                            <form action="{{route('tempat.store')}}" method="POST">
+                            <form action="{{route('kategori.store')}}" method="POST">
                             @csrf
                             @method('POST')
                             <div class="form-group">
 
                                     {{-- Add Nama --}}
-                                    <label class="" for="nama">Nama Tempat</label>
-                                    <input type="text" autocomplete="off" name="nama" id="nama" value="{{ old('nama')}}" class="form-control @error('nama') is-invalid @enderror">
+                                    <label class="" for="nama">Nama Kategori</label>
+                                    <input type="text" name="nama" id="nama" value="{{ old('nama')}}" class="form-control @error('nama') is-invalid @enderror">
                                     @error('nama')
                                         <div class="text-danger">
                                             {{ $message }}
@@ -55,7 +62,7 @@
 
                                     {{-- Tombol simpan dan batal --}}
                                     <div class="footer mt-2">
-                                        <button type="submit" class="btn btn-success">Simpan</button>
+                                        <button type="submit" class="btn btn-success">Simpan</  button>
                                     </div>
                                 </div>
                             </form>
@@ -78,7 +85,7 @@
             proccesing: true,
             autowidth: false,
             ajax: {
-                url: '{{ route('tempat.data') }}'
+                url: '{{ route('kategori.data') }}'
             },
             columns: [
                 {data: 'DT_RowIndex'},

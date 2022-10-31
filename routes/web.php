@@ -5,7 +5,8 @@ use App\Http\Controllers\{
     AuthController,
     DashboardController,
     BarangController,
-    TempatController
+    TempatController,
+    KategoriController
 };
 
 Route::get('/', function () {
@@ -22,7 +23,15 @@ Route::post('/simpanRegister', [AuthController::class, 'simpanRegister'])->name(
 
 // Route Dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard'); 
+
 // Route Barang
+Route::get('/barang/data', [BarangController::class, 'data'])->name('barang.data');
 Route::resource('/barang', BarangController::class);
-// Route Tempat
+
+/// Route Tempat
+Route::get('/tempat/data', [TempatController::class, 'data'])->name('tempat.data');
 Route::resource('/tempat', TempatController::class);
+
+// Route Kategori
+Route::get('/kategori/data', [KategoriController::class, 'data'])->name('kategori.data');
+Route::resource('/kategori', KategoriController::class);

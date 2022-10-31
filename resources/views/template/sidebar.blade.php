@@ -31,6 +31,13 @@
                             </a>
                         </li>
 
+                        <li class="{{ request()->is('kategori*') ? 'active' : ''}}">
+                            <a href="{{ route('kategori.index') }}" class="text-white">
+                                <i class="fas fa-list"></i>
+                                <span>Kategori</span>
+                            </a>
+                        </li>
+
                         <li class="menu-header">Setting</li>
 
                         <li class="{{ request()->is('user*') ? 'active' : ''}}">
