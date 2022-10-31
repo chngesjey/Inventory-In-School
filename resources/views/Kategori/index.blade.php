@@ -21,14 +21,13 @@
                             <h4>Data Kategori</h4>
                         </div>
 
-                        {{-- Tabel --}}
                         <div class="card-body">
-                            <table class="table table-striped">
+                            <table class="table table-striped text-nowrap" style="width: 100%;">
                                 <thead>
                                     <tr>
-                                        <td style="width: 5%">No</td>
-                                        <td>Nama</td>
-                                        <td style="width: 15%">Aksi</td>
+                                        <td scope="col" width="50px">No</td>
+                                        <td scope="col">Nama</td>
+                                        <td scope="col" width="84px">Aksi</td>
                                     </tr>
                                 </thead>
                             </table>
@@ -116,5 +115,62 @@
                 })
             }
         })
-    </script>
+        
+    function editData(url){
+        $('#modalForm').modal('show');
+        $('#modalForm .modal-title').text('Edit Data Kategori');
+
+        // Mereset Setelah Memencet Submit
+        $('#modalForm form')[0].reset();
+        $('#modalForm form').attr('action', url);
+        $('#modalForm [name=_method').val('put');
+
+        $.get(url)
+        .done((response) => {
+            $('#modalForm [name=nama]').val(response.nama);
+        })
+        .fail((errors) => {
+            alert('Tidak Dapat Menampilkan Data');
+            return;
+        })
+    }
+
+
+    function deleteData(url) {
+        // Menambahkan Alert Seperti Di Web Side SweetAlert 
+        swal({
+            title: "Yakin Dek Ingin Hapus?",
+            text: "Jika Adek Klik Oke! Maka Data Akan Terhapus",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                $.post(url, {
+                    '_token' : $('[name = csrf-token]').attr('content'),
+                    '_method' : 'delete'
+            })            
+            .done((response) => {
+                swal({
+                    title: "Sukses Dek!",
+                    text: "Data Berhasil Dihapus",
+                    icon: "success",
+                });
+                    return;
+            })
+            .fail((errors) => {
+                swal({
+                    title: "Gagal Dek!",
+                    text: "Data Gagal Dihapus",
+                    icon: "error",
+                });
+                    return;
+            });
+
+            table.ajax.reload();
+        }
+    });
+}
+</script>
 @endpush

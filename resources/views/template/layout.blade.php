@@ -34,8 +34,6 @@
            @include('template.sidebar')
             <!-- Main Content -->
             <div class="main-content">
-
-                <section class="section">
                     @yield('content')
                     <!-- <div class="section-header">
                         <h1>Blank Page</h1>
@@ -43,7 +41,6 @@
 
                     <div class="section-body">
                     </div> -->
-                </section>
             </div>
             <!-- Footer -->
            @include('template.footer')
