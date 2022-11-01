@@ -2408,8 +2408,30 @@ body, html {
   min-height: 100%;
 }
 
+.gradient {
+  height: 70px;
+  left: 250px;
+  right: 5px;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #9581f4, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 10s ease infinite;
+  box-shadow: 0px 0px 20px black;
+}
+
+@keyframes gradient{
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0%;
+  }
+}
+
 body {
-  background-color: #f4f6f9;
+  background-color:#fff;
   font-size: 14px;
   font-weight: 400;
   font-family: "Nunito", "Segoe UI", arial;

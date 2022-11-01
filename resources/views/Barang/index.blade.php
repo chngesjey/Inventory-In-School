@@ -59,10 +59,7 @@
                 {data: 'DT_RowIndex'},
                 {data: 'kode'},
                 {data: 'nama'},
-                {data: 'kategori_id'},
                 {data: 'tempat_id'},
-                {data: 'stok'},
-                {data: 'keterangan'},
                 {data: 'aksi'}
             ]
         });
@@ -90,11 +87,11 @@
             }
     })
 
-    $('.table').on('submit', function(e){
+    $('#modalForm').on('submit', function(e){
         if(! e.preventDefault()){
-            $.post($('.table form').attr('action'), $('.table form').serialize())
+            $.post($('#modalForm form').attr('action'), $('#modalForm form').serialize())
             .done((response) => {
-                $('#.table').modal('hide');
+                $('#modalForm').modal('hide');
                 table.ajax.reload();
                 iziToast.success({
                     title: 'Sukses',

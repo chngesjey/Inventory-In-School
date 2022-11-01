@@ -1,4 +1,4 @@
-<div class="modal fade" id="modalForm" padding-right: 17px;" aria-modal="true" role="dialog" data-backdrop="static" data_keyboard="false">
+<div class="modal fade" id="modalForm" padding-right: 17px; aria-modal="true" role="dialog" data-backdrop="static" data_keyboard="false">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -15,11 +15,11 @@
 
                         <!-- Add Kode -->
                         <label class="" for="nama">Kode Barang</label>
-                        <input type="text" class="form-control" value="..." aria-label="Disabled input example" disabled readonly>
+                        <input type="text" name="kode" class="form-control" value="{{$kode}}" aria-label="Disabled input example" readonly>
 
                          <!-- Add Nama  -->
                         <label class="" for="nama">Nama Barang</label>
-                        <input type="text" name="nama" id="nama" value="{{ old('nama')}}" class="form-control @error('nama') is-invalid @enderror">
+                        <input type="text" autocomplete="off" name="nama" id="nama" value="{{ old('nama')}}" class="form-control @error('nama') is-invalid @enderror">
                         @error('nama')
                             <div class="text-danger">
                                 {{ $message }}

@@ -17,40 +17,46 @@ class BarangController extends Controller
      */
     public function index()
     {
+        $bulan = date('m');
+        $tahun = date('Y');
+        $maxid = Barang::max('id')+1;
+
         $barang = Barang::all();
         $tempat = Tempat::all();
         $kategori = Kategori::all();
-        return view('barang.index', compact('barang', 'tempat', 'kategori'));
+        $kode = 'INV'. '/'. $maxid. '/'. $bulan. '/'. $tahun;
+        return view('barang.index', compact('barang', 'tempat', 'kategori', 'kode'));
     }
 
-    public function data() // Menambahkan DataTable
+    public function data()
     {
-        $date -> format('d');
-        $year -> format('Y');
+     
 
-        $barang = Barang::orderBy('id', 'desc')->get();
+        $barang = barang::orderBy('id', 'desc')->get();
 
         return datatables()
-        ->of($barang)
-        ->addIndexColumn()
-        ->addColumn('kategori_id', function($barang){
-            return !empty($barang->kategori->nama) ? $barang->kategori->nama : '-';
-        })
-        ->addColumn('tempat_id', function($barang){
-            return !empty($barang->tempat->nama) ? $barang->tempat->nama : '-';
-        })
-        ->addColumn('aksi', function($barang){
-            return '
-            
-            <div class="btn-group">
-                <button onclick="editData(`' .route('tempat.update', $tempat->id). '`)" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></button>
-                <button onclick="deleteData(`' .route('tempat.destroy', $tempat->id). '`)" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-            </div>
-        ';
-    })
-    ->rawColumns(['aksi'])
-    ->make(true);
-}
+            ->of($barang)
+            ->addIndexColumn()
+            ->addColumn('kategori_id', function($barang){
+                return !empty($barang->kategori->nama) ? $barang->kategori->nama : '-';
+            })
+            ->addColumn('tempat_id', function($barang){
+                return !empty($barang->tempat->nama) ? $barang->tempat->nama : '-';
+            })
+            ->addColumn('aksi', function($barang){
+                return '
+
+                <div class="btn-group">
+                    <button onclick="editData(`' .route('barang.update', $barang->id). '`)" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></button>
+                    <button onclick="deleteData(`' .route('barang.destroy', $barang->id). '`)" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                    <button onclick="deleteData(`' .route('barang.destroy', $barang->id). '`)" class="btn btn-success btn-sm"><i class="fa fa-print"></i></button>
+                </div>
+
+                ';
+            })
+            ->rawColumns(['aksi', 'kategori_id', 'tempat_id'])
+            ->make(true);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -120,7 +126,7 @@ class BarangController extends Controller
     public function edit($id)
     {
         $barang = Barang::find($id);
-        return view ('barang.index', compact('barang'));
+        return view('barang.form', compact('barang'));
     }
 
     /**

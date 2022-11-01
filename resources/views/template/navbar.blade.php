@@ -1,6 +1,6 @@
 <div id="app">
+    <div class="gradient">
         <div class="main-wrapper main-wrapper-1">
-            <div class="navbar bg-warning"></div>
             <nav class="navbar navbar-expand-lg main-navbar">
                 <form class="form-inline mr-auto">
                     <ul class="navbar-nav mr-3">
@@ -32,3 +32,5 @@
                     </li>
                 </ul>
             </nav>
+        </div>
+</div>
