@@ -21,9 +21,9 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <td style="width: 5%">No</td>
-                                        <td>Nama</td>
-                                        <td style="width: 15%">Aksi</td>
+                                        <td scope="col" width="50px">No</td>
+                                        <td scope="col">Nama</td>
+                                        <td scope="col" width="84px">Aksi</td>
                                     </tr>
                                 </thead>
                             </table>
@@ -67,11 +67,13 @@
             </div>
         </div>
     </section>
+@include('tempat.form')
 @endsection
 
 @push('script')
     <script>
-    // Data Tables
+
+ // Data Tables
     let table;
     $(function() {
         table = $('.table').DataTable({
@@ -87,6 +89,7 @@
             ]
         });
     })
+
     $('#formTambah').on('submit', function(e){
             if(! e.preventDefault()){
                 $.post($('#formTambah form').attr('action'), $('#formTambah form').serialize())
@@ -109,5 +112,83 @@
                 })
             }
         })
-    </script>
+    // Fungsi Edit Data 
+    $('#modalForm').on('submit', function(e){
+            if(! e.preventDefault()){
+                $.post($('#modalForm form').attr('action'), $('#modalForm form').serialize())
+                .done((response) => {
+                    $('#modalForm').modal('hide');
+                    table.ajax.reload();
+                    iziToast.success({
+                        title: 'Sukses',
+                        message: 'Data berhasil di ubah',
+                        position: 'topRight'
+                    })
+                })
+                .fail((errors) => {
+                    iziToast.error({
+                        title: 'Gagal',
+                        message: 'Data gagal di ubah',
+                        position: 'topRight'
+                    })
+                    return;
+                })
+            }
+        })
+        function editData(url){
+        $('#modalForm').modal('show');
+        $('#modalForm .modal-title').text('Edit Nama Tempat');
+
+        // Mereset Setelah Memencet Submit
+        $('#modalForm form')[0].reset();
+        $('#modalForm form').attr('action', url);
+        $('#modalForm [name=_method').val('put');
+
+        $.get(url)
+        .done((response) => {
+            $('#modalForm [name=nama]').val(response.nama);
+        })
+        .fail((errors) => {
+            alert('Tidak Dapat Menampilkan Data');
+            return;
+        })
+    }
+
+    function deleteData(url) {
+        // Menambahkan Alert Seperti Di Web Side SweetAlert 
+        swal({
+            title: "Yakin Dek Ingin Hapus?",
+            text: "Jika Adek Klik Oke! Maka Data Akan Terhapus",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                $.post(url, {
+                    '_token' : $('[name = csrf-token]').attr('content'),
+                    '_method' : 'delete'
+            })            
+            .done((response) => {
+                swal({
+                    title: "Sukses Dek!",
+                    text: "Data Berhasil Dihapus",
+                    icon: "success",
+                });
+                    return;
+            })
+            .fail((errors) => {
+                swal({
+                    title: "Gagal Dek!",
+                    text: "Data Gagal Dihapus",
+                    icon: "error",
+                });
+                    return;
+            });
+
+            table.ajax.reload();
+        }
+    });
+}
+</script>
 @endpush

@@ -7,6 +7,7 @@ use App\Models\Tempat;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Validator;
+use PDF;
 
 class BarangController extends Controller
 {
@@ -49,13 +50,21 @@ class BarangController extends Controller
                 <div class="btn-group">
                     <button onclick="editData(`' .route('barang.update', $barang->id). '`)" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></button>
                     <button onclick="deleteData(`' .route('barang.destroy', $barang->id). '`)" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-                    <button onclick="deleteData(`' .route('barang.destroy', $barang->id). '`)" class="btn btn-success btn-sm"><i class="fa fa-print"></i></button>
+                    <a href="'.route('barang.pdf', $barang->id).'" target="_blank" class="btn btn-sm btn-success"><i class="fa fa-print"></i></a>
                 </div>
 
                 ';
             })
             ->rawColumns(['aksi', 'kategori_id', 'tempat_id'])
             ->make(true);
+    }
+
+    public function pdf($id)
+    {
+        $barang = Barang::find($id);
+
+        $pdf = PDF::loadview('barang.pdf', compact('barang'));
+        return $pdf->stream('barang.pdf');
     }
 
     /**

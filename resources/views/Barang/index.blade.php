@@ -39,7 +39,6 @@
             </div>
         </div>
     </section>
-    
 @include('barang.form')
 
 @endsection
@@ -109,6 +108,11 @@
             })
         }
     })
+
+    // Menambahkan Blank Page Untuk PDF (Mendownload PDF Lewat[PDF Laravel])
+    function pdf(url){
+        $('.form-barang').attr('action', url).attr('target', '_blank').submit();
+    }
 
     function addForm(url){
             $('#modalForm').modal('show');

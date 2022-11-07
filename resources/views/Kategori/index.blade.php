@@ -1,18 +1,14 @@
 @extends('template.layout')
-
 @section('title')
     Kategori
 @endsection
-
 @section('content')
     <section class="section">
         <div class="section-header">
             <h1>Kategori</h1>
         </div>
-
         <div class="section-body">
             <div class="row">
-
                 {{-- Data Kategori --}}
                 <div class="col-12 col-md-7 col-lg-7">
                     <div class="card">
@@ -20,9 +16,9 @@
                         <div class="card-header">
                             <h4>Data Kategori</h4>
                         </div>
-
+                        {{-- Tabel --}}
                         <div class="card-body">
-                            <table class="table table-striped text-nowrap" style="width: 100%;">
+                            <table class="table table-striped">
                                 <thead>
                                     <tr>
                                         <td scope="col" width="50px">No</td>
@@ -32,11 +28,9 @@
                                 </thead>
                             </table>
                         </div>
-
                     </div>
                 </div>
-
-                {{-- Tambah Kategori --}}
+                {{-- Tambah Barang --}}
                 <div class="col-12 col-md-5 col-lg-5">
                     <div class="card">
 
@@ -52,7 +46,7 @@
 
                                     {{-- Add Nama --}}
                                     <label class="" for="nama">Nama Kategori</label>
-                                    <input type="text" name="nama" id="nama" value="{{ old('nama')}}" class="form-control @error('nama') is-invalid @enderror">
+                                    <input type="text" autocomplete="off" name="nama" id="nama" value="{{ old('nama')}}" class="form-control @error('nama') is-invalid @enderror">
                                     @error('nama')
                                         <div class="text-danger">
                                             {{ $message }}
@@ -61,7 +55,7 @@
 
                                     {{-- Tombol simpan dan batal --}}
                                     <div class="footer mt-2">
-                                        <button type="submit" class="btn btn-success">Simpan</  button>
+                                        <button type="submit" class="btn btn-success">Simpan</button>
                                     </div>
                                 </div>
                             </form>
@@ -73,11 +67,13 @@
             </div>
         </div>
     </section>
+@include('kategori.form')
 @endsection
 
 @push('script')
     <script>
-    // Data Tables
+
+ // Data Tables
     let table;
     $(function() {
         table = $('.table').DataTable({
@@ -93,6 +89,7 @@
             ]
         });
     })
+
     $('#formTambah').on('submit', function(e){
             if(! e.preventDefault()){
                 $.post($('#formTambah form').attr('action'), $('#formTambah form').serialize())
@@ -115,10 +112,32 @@
                 })
             }
         })
-        
-    function editData(url){
+    // Fungsi Edit Data 
+    $('#modalForm').on('submit', function(e){
+            if(! e.preventDefault()){
+                $.post($('#modalForm form').attr('action'), $('#modalForm form').serialize())
+                .done((response) => {
+                    $('#modalForm').modal('hide');
+                    table.ajax.reload();
+                    iziToast.success({
+                        title: 'Sukses',
+                        message: 'Data berhasil di ubah',
+                        position: 'topRight'
+                    })
+                })
+                .fail((errors) => {
+                    iziToast.error({
+                        title: 'Gagal',
+                        message: 'Data gagal di ubah',
+                        position: 'topRight'
+                    })
+                    return;
+                })
+            }
+        })
+        function editData(url){
         $('#modalForm').modal('show');
-        $('#modalForm .modal-title').text('Edit Data Kategori');
+        $('#modalForm .modal-title').text('Edit Nama Kategori');
 
         // Mereset Setelah Memencet Submit
         $('#modalForm form')[0].reset();
@@ -135,7 +154,6 @@
         })
     }
 
-
     function deleteData(url) {
         // Menambahkan Alert Seperti Di Web Side SweetAlert 
         swal({
@@ -148,7 +166,7 @@
             .then((willDelete) => {
             if (willDelete) {
                 $.post(url, {
-                    '_token' : $('[name = csrf-token]').attr('content'),
+                    '_token' : $('[name=csrf-token]').attr('content'),
                     '_method' : 'delete'
             })            
             .done((response) => {
@@ -167,7 +185,6 @@
                 });
                     return;
             });
-
             table.ajax.reload();
         }
     });

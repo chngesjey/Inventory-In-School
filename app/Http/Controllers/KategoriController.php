@@ -125,8 +125,8 @@ class KategoriController extends Controller
     public function destroy($id)
     {
         $kategori = Kategori::find($id);
-        $kategori -> delete();
- 
-        return response()->json(null, 204);
+        $kategori->delete();
+
+        return redirect('kategori');
     }
 }

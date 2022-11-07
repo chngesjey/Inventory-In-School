@@ -17,6 +17,7 @@ Route::get('/', function () {
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/postlogin', [AuthController::class, 'postlogin'])->name('postlogin');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
 // Route Register
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/simpanRegister', [AuthController::class, 'simpanRegister'])->name('simpanRegister');
@@ -26,6 +27,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 
 // Route Barang
 Route::get('/barang/data', [BarangController::class, 'data'])->name('barang.data');
+Route::get('/barang/pdf/{id}', [BarangController::class, 'pdf'])->name('barang.pdf');
 Route::resource('/barang', BarangController::class);
 
 /// Route Tempat
